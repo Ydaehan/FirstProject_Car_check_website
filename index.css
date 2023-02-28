@@ -1,0 +1,98 @@
+body {
+
+  width: 50px;
+  height: 50px;
+  background-image: url('https://cdn.pixabay.com/photo/2022/12/26/13/43/ship-7679100_1280.jpg');
+  background-size: cover;
+}
+.logo{
+  color: rgb(167, 255, 255, .7);
+  font-size: 100px;
+  margin-left: 200px;
+  margin-top: 200px;
+   position: absolute;
+   width: 100%;
+   height: 5px;
+   border-radius: 30px;
+}
+
+input[id="menuicon"]{
+  display: none;
+  margin-top: 100px;
+}
+
+
+/*메뉴 버튼*/
+input[id="menuicon"]+label{
+  z-index: 10;  /*우선순위*/
+  display: block;
+  width: 60px;
+  height: 40px;
+  position: fixed;
+  transition: all .35s;
+  cursor: pointer;
+}
+input[id="menuicon"]:checked +label{
+  z-index: 2;
+  top: 110px;
+}
+
+/*검은 막대기*/
+input[id="menuicon"]+ label span{
+   display: block;
+   position: absolute;
+   width: 100%;
+   height: 5px;
+   border-radius: 30px;
+   background: rgb(0, 0, 0);
+   transition: all .35s;
+}
+
+/*버튼 클릭시 막대시 이동*/
+input[id="menuicon"]+ label span:nth-child(1){
+  top: 0;
+}
+input[id="menuicon"]+ label span:nth-child(2){
+  top: 50%;
+  transform:translateY(-50%);
+}
+input[id="menuicon"]+ label span:nth-child(3){
+  bottom: 0;
+}
+input[id="menuicon"]:checked + label span:nth-child(1){
+  top:50%;
+  transform: translateY(-50%) rotate(45deg);  /*translateY는 y축 이동 ,rotate는 기울기*/
+}
+input[id="menuicon"]:checked + label span:nth-child(2){
+  opacity: 0;   /*투명 요소*/
+}
+input[id="menuicon"]:checked + label span:nth-child(3){
+  bottom: 50%;
+  transform: translateY(50%) rotate(-45deg);
+}
+/*메뉴바*/
+.menu-bar{
+  left: 0;
+  width: 100%;
+  height: 100px;
+  background: rgba(0, 0, 0, 0.3);
+  position: fixed;
+  top: -100px;
+  transition: all .35s;
+}
+input[id="menuicon"]:checked + label + div{
+  top: 0px;
+}
+/*메뉴 속성*/
+.menu {
+  font-size: 30px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);  /*옆으로 나눠지는걸 4번 1fr로 반복*/
+  grid-gap: 400px;
+  width: 500px;
+  text-decoration-line: none;
+}
+
+.text{
+  text-decoration-line: none;
+}
