@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>CAR</title>
+    <link rel="stylesheet" href="text.css" />
+    <link rel="stylesheet" href="block.css" />
+    <script src="test.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div id="title">
+        <h1><a href="index.html">Title</a></h1>
+      </div>
+      <div id="menu">
+        <ul id="list">
+          <li><a href="1.html">menu1</a></li>
+          <li><a href="2.html">menu2</a></li>
+          <li><a href="3.html">menu3</a></li>
+          <li><a href="4.html">menu4</a></li>
+          <li><a href="5.html">menu5</a></li>
+        </ul>
+      </div>
+      <ul id="sideBar">
+        <li><a href="javascript:scroll('side1');">SIDE1</a></li>
+        <li><a href="javascript:scroll('side2');">SIDE2</a></li>
+        <li><a href="javascript:scroll('side3');">SIDE3</a></li>
+        <li><a href="javascript:scroll('side4');">SIDE4</a></li>
+        <li><a href="javascript:scroll('side5');">SIDE5</a></li>
+      </ul>
+      <div id="main">
+        <h3><a id="side1">SIDE1</a></h3>
+        <script>
+          for (let i = 0; i < 100; i++) {
+            document.write("HELLO" + "<br>");
+          }
+        </script>
+        <h3><a id="side2">SIDE2</a></h3>
+        <script>
+          for (let i = 0; i < 100; i++) {
+            document.write("WORLD" + "<br>");
+          }
+        </script>
+        <h3><a id="side3">SIDE3</a></h3>
+        <script>
+          for (let i = 0; i < 100; i++) {
+            document.write("AGAIN" + "<br>");
+          }
+        </script>
+        <h3><a id="side4">SIDE4</a></h3>
+        <script>
+          for (let i = 0; i < 100; i++) {
+            document.write("^_^" + "<br>");
+          }
+        </script>
+        <h3><a id="side5"></a>SIDE5</h3>
+        <script>
+          for (let i = 0; i < 100; i++) {
+            document.write("HAHA" + "<br>");
+          }
+        </script>
+      </div>
+    </div>
+  </body>
+</html>
