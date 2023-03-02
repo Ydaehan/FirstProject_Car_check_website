@@ -14,10 +14,8 @@
   padding-left: 0;
   padding-top: 17px;
 }
-
+/* 두 ID로 나눈 이유 : li 태그를 중앙 정렬 및 구분선 긋기위해 */
 #menu {
-  grid-column-start: 1;
-  grid-column-end: 4;
   text-align: center;
   border-bottom: 2px gray solid;
   border-top: 1.5px gray solid;
@@ -28,7 +26,7 @@
   float: left;
   position: sticky;
   height: 180px;
-  top: 350px;
+  top: 300px;
   padding-right: 40px;
 }
 #sideBar li {
@@ -41,7 +39,6 @@
 }
 #main {
   text-align: center;
-  grid-column-start: 2;
 }
 
 a {
@@ -51,18 +48,25 @@ a {
 
 body {
   margin: 0;
-}
-
-.container {
-  display: grid;
-
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 150px 60px 1fr;
+  padding-bottom: 30px;
 }
 
 #title {
   text-align: center;
   font-size: 30px;
-  grid-column-start: 1;
-  grid-column-end: 4;
+}
+
+#login {
+  text-align: center;
+}
+
+h3 {
+  display: inline-block;
+}
+
+footer {
+  text-align: center;
+  color: gray;
+  border-top: 1px solid black;
+  padding: 30px 0px;
 }
