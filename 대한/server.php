@@ -42,7 +42,7 @@ if(isset($_POST['user_id']) && isset($_POST['user_pw']) && isset($_POST['pw_conf
   else
   {
     $sql_same = "SELECT * FROM manage_user where user_id = '$id'";
-    $sql_nick = "SELECT * FROM manage_user where nick_name = '$nickname'";
+    $sql_nick = "SELECT * FROM manage_user where nickname = '$nickname'";
     $order = mysqli_query($db, $sql_same);
     $nick_check = mysqli_query($db, $sql_nick);
 
@@ -58,9 +58,9 @@ if(isset($_POST['user_id']) && isset($_POST['user_pw']) && isset($_POST['pw_conf
 
     //중복이 없으면 DB에 저장
     else{
-      $con = mysqli_connect("localhost", "root", "car", "caruser_info");
+      $con = mysqli_connect("172.21.4.117", "test", "123", "caruser_info");
   
-      $sql = "insert into manage_user(user_id, pw, nick_name)";
+      $sql = "insert into manage_user(user_id, pw, nickname)";
       $sql .= "values('$id', '$pw' , '$nickname')";
       
       $result = mysqli_query($con, $sql);

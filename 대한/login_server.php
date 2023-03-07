@@ -38,7 +38,7 @@ if(isset($_POST['user_id']) && isset($_POST['user_pw']) )
       // 사용자 입력 pw 와 db에 저장된 pw 가 같을 때 로그인
       if($pw == $hash){
         $_SESSION['md_id'] = $row['user_id']; 
-        $_SESSION['user_nickname'] = $row['nick_name'];
+        $_SESSION['user_nickname'] = $row['nickname'];
         $_SESSION['admin'] = $row['admin'];
         // $_SESSION['no'] = $row['no'];
         header("location: index.php?=로그인성공");
