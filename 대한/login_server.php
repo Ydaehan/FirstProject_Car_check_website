@@ -60,9 +60,4 @@ else{
   header("location: index.php?error=알수없는 오류입니다");
   exit();
 }
-
-
-
-
-
 ?>

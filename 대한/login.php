@@ -27,8 +27,6 @@
 
     <button type="submit" name="login_btn">로그인</button>
     <a href="join.php" class="save">아직 회원이 아니신가요?(회원가입 하러가기</a>
-    
-
     </form>
     
 </body>

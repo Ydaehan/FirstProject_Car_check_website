@@ -28,6 +28,7 @@ session_start();
     <?php
       // $_SESSION['md_id'] ==> login_server.php 에서 세션에 저장 
       if(isset($_SESSION['md_id'])){ ?>   
+        <a href="individual_manage.php">회원 관리</a>
         <a class="text" href="./logout.php">logout</a>
         <h1><?php echo $_SESSION['user_nickname']?>님 반갑습니다</h1>
 
@@ -39,6 +40,7 @@ session_start();
           <a href="manage_user.php">회원 정보 관리</a>
         <?php } ?>
       <?php } else {?>
+        <!-- 비회원인 상태 < 로그인이 안된 상태 > -->
          <!-- 로그인 창 -->
           <label>아이디</label>
           <input type="text" placeholder="아이디..." name="user_id">
@@ -51,7 +53,6 @@ session_start();
         <!-- 로그인 창 -->
       <?php } ?>
 </form>
-      </ul>
     </div>  
   </div>
 </body>
