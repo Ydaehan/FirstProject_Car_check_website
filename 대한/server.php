@@ -58,13 +58,13 @@ if(isset($_POST['user_id']) && isset($_POST['user_pw']) && isset($_POST['pw_conf
 
     //중복이 없으면 DB에 저장
     else{
-      $con = mysqli_connect("172.21.4.117", "test", "123", "caruser_info");
+      include "db,php";
   
       $sql = "insert into manage_user(user_id, pw, nickname)";
       $sql .= "values('$id', '$pw' , '$nickname')";
       
-      $result = mysqli_query($con, $sql);
-      mysqli_close($con);
+      $result = mysqli_query($db, $sql);
+      mysqli_close($db);
       //저장 성공시,실패시 메세지 출력
       if($result){
         header("location: join.php?success=회원가입에 성공하셨습니다");

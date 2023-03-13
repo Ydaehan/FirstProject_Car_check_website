@@ -1,12 +1,19 @@
 <?php 
+header("Content-Type:text/html;charset=utf-8"); 
 session_start();
-$user_id = $_SESSION["md_id"];
-
+$edit_user = $_GET["user_id"];
+if($_SESSION["md_id"] != $edit_user){
+  $user_id = $edit_user;
+  $same = FALSE;
+}else{
+  $user_id = $_SESSION["md_id"];
+  $same = TRUE;
+}
 /* DB 접속 */
 include "db.php";
 
 /* 쿼리 작성 */
-$sql = "delete from manage_user where user_id = $user_id";
+$sql = "delete from manage_user where user_id = '$user_id';";
 
 /* 데이터 베이스에 쿼리 전송 */
 mysqli_query($db,$sql);

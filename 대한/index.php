@@ -28,7 +28,7 @@ session_start();
     <?php
       // $_SESSION['md_id'] ==> login_server.php 에서 세션에 저장 
       if(isset($_SESSION['md_id'])){ ?>   
-        <a href="individual_manage.php">회원 관리</a>
+        <a href="individual_manage.php?user_id=<?php echo $_SESSION['md_id']?>">회원 관리</a>
         <a class="text" href="./logout.php">logout</a>
         <h1><?php echo $_SESSION['user_nickname']?>님 반갑습니다</h1>
 

@@ -2,7 +2,6 @@
     /* DB 연결 */
     include 'db.php';
     session_start();
-
     $md_id = isset($_SESSION["md_id"])? $_SESSION["md_id"]:"";
     $user_nickname = isset($_SESSION["user_nickname"])? $_SESSION["user_nickname"]:"";
     
@@ -64,6 +63,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>회원 DB 관리</title>
+    <script type="text/javascript">
+        function del_check(userId){
+        var check = confirm("정말 탈퇴하시겠습니까?\n탈퇴한 아이디는 사용하실 수 없습니다.");
+
+        if(check == true){
+            location.href = "delete.php?user_id="+userId;
+        }
+    };
+    </script>
 </head>
 <body>
     회원 정보 관리<br>
@@ -101,6 +109,8 @@
                 <td><?php echo $cnt?></td>
                 <td><?php echo $array["user_id"]?></td>
                 <td><?php echo $array["nickname"]?></td>
+                <td><a href="individual_manage.php?user_id=<?php echo $array["user_id"];?>">수정</a></td>
+                <td><a href="#" onclick="del_check('<?php echo $array["user_id"]?>')">삭제</a></td>
             </tr>
             <?php
                 /* paging */

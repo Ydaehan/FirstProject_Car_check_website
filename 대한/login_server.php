@@ -41,7 +41,7 @@ if(isset($_POST['user_id']) && isset($_POST['user_pw']) )
         $_SESSION['user_nickname'] = $row['nickname'];
         $_SESSION['admin'] = $row['admin'];
         // $_SESSION['no'] = $row['no'];
-        header("location: index.php?=로그인성공");
+        header("location: index.php");
         exit();
       }
       else{

@@ -1,14 +1,19 @@
 <?php
 session_start();
-
 /* 로그인 사용자 */
-$user_id = $_SESSION["md_id"];
+$edit_user = $_GET["user_id"]; // url 을 통해 받은 user_id 의 값을 받아옴
+if($_SESSION["md_id"] != $edit_user ){ // 세션에 저장된 값과 받아온 값이 같지 않으며 받아온 값이 없지 않을때
+  $user_id = $edit_user;
+}else{
+  $user_id = $_SESSION["md_id"];
+}
+
 
 /* DB 연결 */
 include "db.php";
 
 /* 쿼리 작성 */
-$sql = "select * from manage_user where user_id = $user_id;";
+$sql = "select * from manage_user where user_id = '$user_id';";
 
 /* 쿼리 전송 */
 $result = mysqli_query($db, $sql);
@@ -41,10 +46,10 @@ $array = mysqli_fetch_array($result);
         };
       };
 
-      if(pw.value){
+      if(pw_confirm.value){
         if(pw.value != pw_confirm.value){
           var err_txt = document.querySelector(".err_pw_confirm");
-          err.txt.textContent = "* 비밀번호를 확인해 주세요.";
+          err_txt.textContent = "* 비밀번호를 확인해 주세요.";
           pw_confirm.focus();
           return false;
         };
@@ -66,13 +71,13 @@ $array = mysqli_fetch_array($result);
       var check = confirm("정말 탈퇴하시겠습니까?\n탈퇴한 아이디는 사용하실 수 없습니다.");
 
       if(check == true){
-        location.href = "delete.php";
-      ;}
+        location.href = "delete.php?user_id=<?php echo $user_id;?>";
+      }
     }; 
   </script>
 </head>
 <body>
-<form name="edit_form" action="edit_ok.php" method="post" onsubmit="return edit_check()">
+<form name="edit_form" action="edit_ok.php?user_id=<?php echo $user_id;?>" method="post" onsubmit="return edit_check()">
 <!-- fieldset 태그는 관련된 폼 요소들을 하나의 그룹으로 묶는 역할 -->
 <fieldset>
     <legend>정보 수정</legend>
@@ -96,7 +101,7 @@ $array = mysqli_fetch_array($result);
     </p>
 
     <p>
-      <label for="nickname" class="txt">PassWord</label>
+      <label for="nickname" class="txt">NickName</label>
       <input type="text" name="nickname" id="nickname" class="nickname">
       <br>
       <span class="err_nickname">* 닉네임는 1~8글자만 입력할 수 있습니다.</span>
