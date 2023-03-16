@@ -19,8 +19,7 @@
     <?php if(isset($_GET['success'])) { ?>
     <p class="success"><?php echo $_GET['success']; ?></p>
     <?php } ?>
-
-
+    
     <label>아이디</label>
     <input type="text" placeholder="아이디..." name="user_id">
 
@@ -28,7 +27,11 @@
     <input type="password" placeholder="비밀번호..." name="user_pw">
 
     <label>비밀번호 확인</label>
-    <input type="password" placeholder="비밀번호..." name="user_pw2">
+    <input type="password" placeholder="비밀번호..." name="pw_confirm">
+
+    <!-- 회원 가입 시 닉네임도 기입 추가 -->
+    <label>닉네임</label>
+    <input type="text" placeholder="닉네임..." name="user_nickname">
 
     <button type="submit">회원가입</button>
     <a href="login.php" class="save">(이미 회원 이신가요?) 로그인 하러 가기</a>

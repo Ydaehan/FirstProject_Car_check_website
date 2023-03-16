@@ -26,17 +26,21 @@ if(isset($_POST['user_id']) && isset($_POST['user_pw']) )
 
 
   else{
-    $sql = "select * from member where md_id = '$id'";
+    // db 에서 $id에 사용자로 부터 입력받은 id 와 일치하는 id를 검색
+    $sql = "select * from manage_user where user_id = '$id'";
     $result = mysqli_query($db, $sql);
 
+    // 검색 결과 일치하는 id 가 존재하는 경우 다음 절차
     if(mysqli_num_rows($result) === 1){
       $row = mysqli_fetch_assoc($result);
-      $hash = $row['md_pw'];
+      $hash = $row['pw'];
 
+      // 사용자 입력 pw 와 db에 저장된 pw 가 같을 때 로그인
       if($pw == $hash){
-        $_SESSION['md_id'] = $row['md_id'];
-        $_SESSION['md_num'] = $row['md_num'];
-        $_SESSION['no'] = $row['no'];
+        $_SESSION['md_id'] = $row['user_id']; 
+        $_SESSION['user_nickname'] = $row['nickname'];
+        $_SESSION['admin'] = $row['admin'];
+        // $_SESSION['no'] = $row['no'];
         header("location: index.php?=로그인성공");
         exit();
       }

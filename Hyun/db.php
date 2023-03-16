@@ -1,13 +1,11 @@
 <?php
+$dbAddress = "172.21.2.130";
+$dbUserID = "hyun";
+$dbUserPW = "123";
+$dbName = "caruser_info";
 
-$db = mysqli_connect("localhost", "root", "", "test");
+$db = mysqli_connect($dbAddress, $dbUserID, $dbUserPW, $dbName);
 if(!$db){
-  echo "DB접속 실패";
+  die(mysqli_connect_error());
 }
-
-
-
-
-
-
 ?>
