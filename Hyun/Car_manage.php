@@ -49,8 +49,9 @@ session_start();
           <br>
           <p>차량 유종을 선택하세요.</p>
           <select name="car_type" id="selectFuel">
-            <option value="Gasoline">선택</option>
+            <option value="null">선택</option>
             <option value="Gasoline">휘발유</option>
+            <option value="P_Gasoline">고급휘발유</option>
             <option value="Diesel">경유</option>
             <option value="Electric">전기</option>
           </select>
