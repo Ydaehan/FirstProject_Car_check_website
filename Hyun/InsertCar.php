@@ -2,7 +2,6 @@
 include ('db.php');
 session_start();
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -30,66 +29,43 @@ session_start();
       </div>
       <!-- 좌측 퀵메뉴 -->
       <ul id="sideBar">
-        <li><a href="javascript:scroll('side1');">나의 차량</a></li>
+        <li><a href="javascript:scroll('side1');">SIDE1</a></li>
         <li><a href="javascript:scroll('side2');">SIDE2</a></li>
         <li><a href="javascript:scroll('side3');">SIDE3</a></li>
         <li><a href="javascript:scroll('side4');">SIDE4</a></li>
         <li><a href="javascript:scroll('side5');">SIDE5</a></li>
       </ul>
       <!-- 중앙 페이지 본문 -->
-      <div id="main">
-        <h2>WELCOME!</h2>
-        <p>...은 차량 관리 웹으로...</p>
+      <div id="carDataForm">
+        <h2>차량 등록</h2>
+        <p>먼저, 차량을 등록해보세요.</p>
         <br>
-        <h3>나의 차량</h3>
-        <input type="button" value="close" onclick="showHide(this,'side1')">
-        <div id="side1">
-          <script>
-            for (let i = 0; i < 100; i++) {
-              document.write("HELLO" + "<br>");
-            }
-          </script>
-        </div>
-        <br>
-        <h3>SIDE2</h3>
-        <input type="button" value="close" onclick="showHide(this,'side2')">
-        <div id="side2">
-          <script>
-            for (let i = 0; i < 100; i++) {
-              document.write("WORLD" + "<br>");
-            }
-          </script>
-        </div>
-        <br>
-        <h3>SIDE3</h3>
-        <input type="button" value="close" onclick="showHide(this,'side3')">
-        <div id="side3">
-          <script>
-            for (let i = 0; i < 100; i++) {
-              document.write("AGAIN" + "<br>");
-            }
-          </script>
-        </div>
-        <br>
-        <h3>SIDE4</h3>
-        <input type="button" value="close" onclick="showHide(this,'side4')">        
-        <div id="side4">
-            <script>
-              for (let i = 0; i < 100; i++) {
-                document.write("^_^" + "<br>");
-              }
-            </script>
-        </div>
-        <br>
-        <h3>SIDE5</h3>
-        <input type="button" value="close" onclick="showHide(this,'side5')">
-        <div id="side5">
-          <script>
-                for (let i = 0; i < 100; i++) {
-                  document.write("HAHA" + "<br>");
-                }
-          </script>
-        </div> 
+        <form action="CarDataToDB.php" method="POST">
+          <p>차량번호를 입력해주세요.</p>
+          <p class="ex">차량번호는 띄어쓰기 없이 입력해주세요.</p>
+          <input type="text" name="car_number" placeholder="차량번호">
+          <br>
+          <p>주행거리를 입력해주세요.</p>
+          <p class="ex">주행거리는 km를 제외한 숫자만 입력해주세요.</p>
+          <input type="text" name="driven_distance" placeholder="주행거리">
+          <br>
+          <p>차량 유종을 선택하세요.</p>
+          <select name="car_type" id="selectFuel">
+            <option value= "select">선택</option>
+            <option value="Gasoline">휘발유</option>
+            <option value="P_Gasoline">고급휘발유</option>
+            <option value="Diesel">경유</option>
+            <option value="Electric">전기</option>
+          </select>
+          <br>
+          <p>마지막 정비일을 입력해주세요.</p>
+          <input type="date" name="date_of_last_service">
+          <p>최근 정비일 당시, 누적 주행거리를 입력해주세요.</p>
+          <p class="ex">주행거리는 km를 제외한 숫자만 입력해주세요.</p>
+          <input type="text" name="last_kilometer" placeholder="주행거리 (최근 정비 전)">
+          <br>
+          <input type="submit" value="차량 등록!">
+      </form>
       </div>
       <!-- 로그인 메뉴 -->
       <div id="login">
@@ -130,3 +106,4 @@ session_start();
     </footer>
   </body>
 </html>
+

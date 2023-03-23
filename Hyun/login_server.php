@@ -50,7 +50,7 @@ if(isset($_POST['user_id']) && isset($_POST['user_pw']) )
       }
     }
     else{
-      header("location: index.php?error=아이디가 잘못됬습니다");
+      header("location: index.php?error=아이디가 잘못됐습니다");
       exit();
     }
   }

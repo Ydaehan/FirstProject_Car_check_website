@@ -75,3 +75,12 @@ footer {
   border: 3px solid black;
   text-align: center;
 }
+
+.ex {
+  color: gray;
+  font-size : 10px;
+}
+
+p {
+  margin-bottom: 0;
+}
