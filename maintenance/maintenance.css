@@ -1,0 +1,99 @@
+
+body{
+  margin: 0;
+}
+
+.menuBorder{
+  width: 50%;
+  height: 50%;
+  border: 2px solid red;
+  display: grid;
+  place-items:center;
+  min-height: 100vh;
+
+}
+
+.imgIcon{
+  width: 300px;
+  height: 300px;
+  font-family: system-ui, serif;
+  font-size: 2rem;
+  padding: 1px;
+  border-radius: 1rem;
+}
+
+p{  
+  padding: 1px;
+}
+
+/* .aircon{
+  width: 20%;
+  height: 20%;
+}
+
+.enginOil{
+  width: 20%;
+  height: 20%;
+}
+
+.wiper{
+  width: 20%;
+  height: 20%;
+}
+.blakeOil{
+  
+  width: 20%;
+  height: 20%;
+}
+.airCleaner{
+  
+  width: 20%;
+  height: 20%;
+}
+.enginAntifreeze{
+  
+  width: 20%;
+  height: 20%;
+}
+.DriveBelt{
+  
+  width: 20%;
+  height: 20%;
+}
+
+.Battery{
+  width: 20%;
+  height: 20%;
+}
+.Tire{
+  width: 10%;
+  height: 10%;
+}
+.PowerSteeringOil{
+  width: 10%;
+  height: 10%;
+}
+.MissionOil{
+  width: 10%;
+  height: 10%;
+}
+.BrakePadsDiscs{
+  width: 10%;
+  height: 10%;
+}
+.FuelFilter{
+  width: 10%;
+  height: 10%;
+}
+.SparkPlug{
+  width: 10%;
+  height: 10%;
+}
+.TimingBelt{
+  width: 10%;
+  height: 10%;
+}
+.TireLocation{
+  width: 10%;
+  height: 10%;
+} */
