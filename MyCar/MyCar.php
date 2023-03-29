@@ -1,95 +1,69 @@
 <?php
-//include ('./db/db.php');
-//session_start();
+include ('db.php');
+session_start();
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <title>CAR</title>
-    <link rel="stylesheet" type="text/css" href="./CSS/text.css">
-    <link rel="stylesheet" type="text/css" href="./CSS/grid.css">
-    <script src="sideBar.js"></script>
-    <script src="textHide.js"></script>
+    <link rel="stylesheet" type="text/css" href="../CSS/text.css">
+    <link rel="stylesheet" type="text/css" href="../CSS/grid.css">
+    <script src="./JS/sideBar.js"></script>
+    <script src="./JS/textHide.js"></script>
   </head>
   <body>
     <div class="container">
       <div id="title">
-        <h1><a href="index.php">Title</a></h1>
+        <h1><a href="../index.php">Title</a></h1>
       </div>
       <!-- 상단 메뉴 -->
       <div id="menu">
         <ul id="list">
-          <li><a href="./MyCar/MyCar.php">나의 차량</a></li>
-          <li><a href="./maintenance/maintenance.php">점검 목록</a></li>
-          <li><a href="./freeBoard/freeBoardIndex.php">자유게시판</a></li>
+          <li><a href="MyCar.php">나의 차량</a></li>
+          <li><a href="../maintenance/maintenance.php">점검 목록</a></li>
+          <li><a href="../freeBoard/freeBoardIndex.php">자유게시판</a></li>
           <li><a href="4.html">menu4</a></li>
           <li><a href="5.html">menu5</a></li>
         </ul>
       </div>
       <!-- 좌측 퀵메뉴 -->
       <ul id="sideBar">
-        <li><a href="javascript:scroll('side1');">나의 차량</a></li>
+        <li><a href="javascript:scroll('side1');">SIDE1</a></li>
         <li><a href="javascript:scroll('side2');">SIDE2</a></li>
         <li><a href="javascript:scroll('side3');">SIDE3</a></li>
         <li><a href="javascript:scroll('side4');">SIDE4</a></li>
         <li><a href="javascript:scroll('side5');">SIDE5</a></li>
       </ul>
       <!-- 중앙 페이지 본문 -->
-      <div id="main">
-        <h2>WELCOME!</h2>
-        <p>...은 차량 관리 웹으로...</p>
-        <br>
-        <h3>나의 차량</h3>
-        <input type="button" value="close" onclick="showHide(this,'side1')">
-        <div id="side1">
-          <script>
-            for (let i = 0; i < 100; i++) {
-              document.write("HELLO" + "<br>");
-            }
-          </script>
-        </div>
-        <br>
-        <h3>SIDE2</h3>
-        <input type="button" value="close" onclick="showHide(this,'side2')">
-        <div id="side2">
-          <script>
-            for (let i = 0; i < 100; i++) {
-              document.write("WORLD" + "<br>");
-            }
-          </script>
-        </div>
-        <br>
-        <h3>SIDE3</h3>
-        <input type="button" value="close" onclick="showHide(this,'side3')">
-        <div id="side3">
-          <script>
-            for (let i = 0; i < 100; i++) {
-              document.write("AGAIN" + "<br>");
-            }
-          </script>
-        </div>
-        <br>
-        <h3>SIDE4</h3>
-        <input type="button" value="close" onclick="showHide(this,'side4')">        
-        <div id="side4">
-            <script>
-              for (let i = 0; i < 100; i++) {
-                document.write("^_^" + "<br>");
-              }
-            </script>
-        </div>
-        <br>
-        <h3>SIDE5</h3>
-        <input type="button" value="close" onclick="showHide(this,'side5')">
-        <div id="side5">
-          <script>
-                for (let i = 0; i < 100; i++) {
-                  document.write("HAHA" + "<br>");
+      <div>
+        <h2>나의 차량</h2>
+        <?php
+            // 
+            $id = $_SESSION['md_id'];
+            $idSearch = "SELECT * FROM user_car WHERE user_id = '$id'";
+            $idSearchQuery = mysqli_query($db, $idSearch);
+            $idRow = mysqli_fetch_array($idSearchQuery);
+            if(!($idRow['user_id'] == $id)) {
+                echo '<h4><a href="InsertCar.php">차량 등록하러 가기</a></h4>';
+            } else {
+                $search = "SELECT * FROM user_car_data WHERE user_id = '$id'";
+                $searchQuery = mysqli_query($db, $search);
+                while($row = mysqli_fetch_array($searchQuery)) {
+                    $carNumber = $row['car_number'];
+                    $drivenDistance = $row['driven_distance'];
+                    $carType = $row['car_type'];
+                    $dateOfLastService = $row['date_of_last_service'];
+                    $lastKilometer = $row['last_kilometer'];
+                    echo "차량번호 :".$carNumber.
+                        "<br>누적주행거리 : ".$drivenDistance.
+                        "<br>유종 : ".$carType.
+                        "<br>마지막 점검일 : ".$dateOfLastService.
+                        "<br>마지막 점검 시 주행거리 : ".$lastKilometer."<br>";
                 }
-          </script>
-        </div> 
+            }
+        ?>
+
       </div>
       <!-- 로그인 메뉴 -->
       <div id="login">
@@ -130,3 +104,4 @@
     </footer>
   </body>
 </html>
+
