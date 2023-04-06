@@ -60,22 +60,24 @@ if ($e_pageNum > $total_page) {
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>회원 DB 관리</title>
-  <script type="text/javascript">
-    function del_check(userId) {
-      var check = confirm("정말 탈퇴하시겠습니까?\n탈퇴한 아이디는 사용하실 수 없습니다.");
+\
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원 DB 관리</title>
+    <script type="text/javascript">
+        function del_check(userId){
+        var check = confirm("정말 탈퇴하시겠습니까?\n탈퇴한 아이디는 사용하실 수 없습니다.");
 
-      if (check == true) {
-        location.href = "./delete.php?user_id=" + userId;
-      }
+        if(check == true){
+            location.href = "./delete.php?user_id="<?php echo $user_id;?>;
+        }
     };
   </script>
 </head>
 
 <body>
+
   회원 정보 관리<br>
   <h2>* 관리자 페이지 *</h2>
   <p>"<?php echo $user_nickname ?>"님,안녕하세요.</p>
@@ -145,7 +147,6 @@ if ($e_pageNum > $total_page) {
       <a href="./manage_user.php?page=<?php echo ($page + 1); ?>">다음</a>
     <?php }; ?>
   </p>
-
 </body>
 
 </html>
