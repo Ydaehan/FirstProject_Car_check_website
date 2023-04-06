@@ -34,7 +34,7 @@
     <input type="text" placeholder="닉네임..." name="user_nickname">
 
     <button type="submit">회원가입</button>
-    <a href="../login/login.php" class="save">(이미 회원 이신가요?) 로그인 하러 가기</a>
+    <a href="../index.php" class="save">(이미 회원 이신가요?) 로그인 하러 가기</a>
 
     </form>
     
