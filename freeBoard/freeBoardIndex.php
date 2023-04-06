@@ -1,12 +1,18 @@
 <?php
   /* DB 연결 */
-  include '../db/db.php';
-  session_start();
+  include ('../db/db.php');
+  include ('./freeBoardSearch.php');
   $md_id = isset($_SESSION["md_id"])? $_SESSION["md_id"]:"";
 
+  /* 검색 변수 */
+  $category = isset($_GET['catgo'])?$_GET['catgo']:"";
+  $search_con = isset($_GET['search'])?$_GET['search']:"";
+  
+  /* 검색 변수가 존재하는 경우 검색 결과를 출력 */
+  
   /* 쿼리 작성 */ /* 쿼리 전송 */
-  $result = makeQuery("select * from free_board;");
-
+  $result = freeBoardSearch($category,$search_con);
+  
   /* paging : 전체 데이터 수 */
   $num = mysqli_num_rows($result);
 
@@ -52,14 +58,25 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="../css/freeBoardCSS.css" rel="stylesheet">
   <title>자유게시판</title>
 </head>
 <body>
   <!-- Title -->
-  <h1>자유게시판</h1>
+  <h1><a href="./freeBoardIndex.php">자유게시판</a></h1>
   <a href="../index.php">홈으로</a>
   <h3>자유롭게 글을 쓸 수 있는 게시판 입니다.</h3>
   <!-- Search Block -->
+  <div class="search_box">
+    <form action="./freeBoardIndex.php">
+      <SELECT name="catgo">
+        <option value="title">제목</option>
+        <option value="user_id">글쓴이</option>
+        <option value="content">내용</option>
+      </SELECT>
+      <input type="text" name="search" size="40" required="required"> <button>검색</button>
+    </form>
+  </div>
   
   <!-- View freeBoard List -->
   <p>게시글 총합 : <?php echo $num; ?></p>
@@ -77,7 +94,7 @@
 
     /* paging : 쿼리 작성 - Limit 몇번부터, 몇개 */
     /* paging : 쿼리 전송 */
-    $result = makeQuery("select * from free_board order by id DESC limit $start, $list_num;");
+    $result = freeBoardSearchPaging($category,$search_con,$start,$list_num);
 
     /* paging : 글번호 */
     $cnt = $start + 1;
@@ -85,11 +102,21 @@
     /* paging : 자유게시판 정보 불러오기(반복) */
     while($array = getArray($result)){
   ?>
-  <br>
+  
     <tr class="free_brd">
+      <br>
         <td><?php echo $cnt?></td>                  <!-- 번호 -->
-        <td><a href="./freeBoardView.php?id=<?php echo $array['id'] ?>"><?php echo $array["title"]?></a></td>       <!-- 제목 -->
-        <td><?php echo $array["user_id"]?></td>     <!-- 작성자 -->
+        <?php if($category == "title") {?>
+          <td><a href="./freeBoardView.php?id=<?php echo $array['id'] ?>"><?php echo  str_ireplace($search_con, '<span class="highlight">'.$search_con.'</span>',$array["title"])?></a></td>       <!-- 제목 -->
+        <?php }else{ ?>
+          <td><a href="./freeBoardView.php?id=<?php echo $array['id'] ?>"><?php echo $array["title"]?></a></td>       <!-- 제목 -->
+        <?php } ?>
+        
+        <?php if($category == "user_id"){?>
+          <td><?php echo str_ireplace($search_con,'<span class="highlight">'.$search_con.'</span>',$array["user_id"]) ?></td>     <!-- 작성자 -->
+        <?php }else{?>
+          <td><?php echo $array["user_id"]?></td>     <!-- 작성자 -->
+        <?php }?>
         <td><?php $dateString = $array["upload_date"];
                   $dateTime = date_create($dateString);
                   $formatDate = date_format($dateTime,"Y/m/d");
@@ -100,7 +127,7 @@
       /* paging */
       $cnt++;
     }?>
-  <!-- Write button but user must be login -->
+    <!--  -->
 
   <p class="pager">
     <?php

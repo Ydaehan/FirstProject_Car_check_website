@@ -62,6 +62,9 @@
           <?php
             include "../db/replyPaging.php";
             /* paging : 시작 번호 = (현재 페이지 번호 - 1) * 페이지 당 보여질 데이터 수 */
+            if($page == 0){
+             $page = 1; 
+            }
             $start = ($page - 1) * $list_num;
             /* paging : 쿼리 작성 - limit 몇번부터, 몇개 */ /* paging : 쿼리 전송 */
             $select_result = makeQuery("select * from reply where board_id = '$id' order by id DESC limit $start, $list_num ;");
