@@ -78,7 +78,7 @@
     <h2>* 관리자 페이지 *</h2>
     <p>"<?php echo $user_nickname?>"님,안녕하세요.</p>
     <p>
-        <button type = "button" id="home_btn"><a href="index.php">Home</a></button>
+        <button type = "button" id="home_btn"><a href="../Hyun/index.php">Home</a></button>
         <a href="../logout/logout.php">Logout</a>
     </p>
     <hr>

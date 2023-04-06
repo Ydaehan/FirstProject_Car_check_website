@@ -67,13 +67,13 @@ $array = getArray($result);
       var check = confirm("정말 탈퇴하시겠습니까?\n탈퇴한 아이디는 사용하실 수 없습니다.");
 
       if(check == true){
-        location.href = "./delete.php?user_id=<?php echo $user_id;?>";
+        location.href = "../manageUser/delete.php?user_id=<?php echo $user_id;?>";
       }
     }; 
   </script>
 </head>
 <body>
-<form name="edit_form" action="./edit_ok.php?user_id=<?php echo $user_id;?>" method="post" onsubmit="return edit_check()">
+<form name="edit_form" action="../manageUser/edit_ok.php?user_id=<?php echo $user_id;?>" method="post" onsubmit="return edit_check()">
 <!-- fieldset 태그는 관련된 폼 요소들을 하나의 그룹으로 묶는 역할 -->
 <fieldset>
     <legend>정보 수정</legend>

@@ -64,6 +64,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>회원 DB 관리</title>
+    <script type="text/javascript">
+        function del_check(userId){
+        var check = confirm("정말 탈퇴하시겠습니까?\n탈퇴한 아이디는 사용하실 수 없습니다.");
+
+        if(check == true){
+            location.href = "../manageUser/delete.php?user_id="+userId;
+        }
+    };
+    </script>
 </head>
 <body>
     회원 정보 관리<br>
@@ -71,7 +80,7 @@
     <p>"<?php echo $user_nickname?>"님,안녕하세요.</p>
     <p>
         <button type = "button" id="home_btn"><a href="index.php">Home</a></button>
-        <a href="list.php">회원 관리</a>
+        <a href="../manageUser/individual_manage.php">회원 관리</a>
         <a href="logout.php">Logout</a>
     </p>
     <hr>
@@ -82,7 +91,60 @@
             <td>아이디</td>
             <td>닉네임</td>
         </tr>
+        <?php
+            /* paging : 시작 번호 = (현재 페이지 번호 - 1) * 페이지 당 보여질 데이터 수 */
+            $start = ($page - 1) * $list_num;
+
+            /* paging : 쿼리 작성 - limit 몇번부터, 몇개 */
+            $sql = "select * from manage_user limit $start, $list_num;";
+
+            /* paging : 쿼리 전송 */
+            $result = mysqli_query($db, $sql);
+
+            /* paging : 글번호 */
+            $cnt = $start + 1;
+
+            /* paging : 회원정보 가져오기(반복) */
+            while($array = mysqli_fetch_array($result)){
+        ?>
+            <tr class="brd">
+                <td><?php echo $cnt?></td>
+                <td><?php echo $array["user_id"]?></td>
+                <td><?php echo $array["nickname"]?></td>
+                <td><a href="../manageUser/individual_manage.php?user_id=<?php echo $array["user_id"];?>">수정</a></td>
+                <td><a href="#" onclick="del_check('<?php echo $array["user_id"]?>')">삭제</a></td>
+            </tr>
+            <?php
+                /* paging */
+                $cnt++;
+            }?>
     </table>
+    <p class="pager">
+        <?php
+        /* paging : 이전 페이지 */
+        if($page <= 1){
+        ?>
+        <a href="./manage_user.php?page=1">이전</a>
+        <?php } else { ?>
+        <a href="./manage_user.php?page=<?php echo ($page-1); ?>">이전</a>
+        <?php };?>
+
+        <?php
+        /* pager : 페이지 번호 출력 */
+        for($print_page = $s_pageNum; $print_page <= $e_pageNum; $print_page++){
+        ?>
+        <a href="./manage_user.php?page=<?php echo $print_page; ?>"></a>
+        <?php };?>
+
+        <?php
+        /* paging : 다음 페이지 */
+        if($page >= $total_page){
+        ?>
+        <a href="./manage_user.php?page=<?php echo $total_page; ?>">다음</a>
+        <?php } else {?>
+        <a href="./manage_user.php?page=<?php echo ($page + 1); ?>">다음</a>
+        <?php }; ?>
+    </p>
     
 </body>
 </html>
