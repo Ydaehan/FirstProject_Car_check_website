@@ -19,9 +19,11 @@ $sql = "delete from manage_user where user_id = '$user_id';";
 mysqli_query($db,$sql);
 
 /* 세션 삭제 */
-unset($_SESSION["md_id"]);
-unset($_SESSION["user_nickname"]);
-unset($_SESSION["admin"]);
+if($_SESSION["md_id"] == $edit_user){
+  unset($_SESSION["md_id"]);
+  unset($_SESSION["user_nickname"]);
+  unset($_SESSION["admin"]);
+}
 
 /* DB(연결) 종료 */
 mysqli_close($db);
