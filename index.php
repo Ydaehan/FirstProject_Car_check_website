@@ -104,7 +104,7 @@ session_start();
         // $_SESSION['md_id'] ==> login_server.php 에서 세션에 저장 
         if(isset($_SESSION['md_id'])){ ?>   
           <a class="text" href="./logout/logout.php">logout</a>
-          <button id="UIMBtn" onclick="location.href='./manageUser/individual_manage.php=<?php echo $_SESSION['md_id']?>'">정보 수정</button>
+          <a href="../manageUser/individual_manage.php?user_id=<?php echo $_SESSION['md_id']?>" id="UIM">정보 수정</a>
           <h1><?php echo $_SESSION['user_nickname']?>님 반갑습니다</h1>
           <!-- admin 일 시에 회원 정보 관리 버튼 활성화 -->
           <?php

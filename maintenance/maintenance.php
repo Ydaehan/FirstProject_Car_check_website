@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="../CSS/grid.css">
   <link rel="stylesheet" type="text/css" href="../CSS/text.css">
+  <script src="../JS/selectedValue.js"></script>
   <title>Document</title>
 </head>
 <body>
@@ -48,20 +49,36 @@
         // 차 번호가 선택 되면 밑의 메뉴들이 펼쳐지게
         
         $result = makeQuery("SELECT * FROM user_car WHERE user_id = '$_SESSION[md_id]'");
-        $array = getArray($result);
-        echo '<select name="carNum" id="selectCarNum" onchange="changeViewCarData()">
-        <option value= "carNum"></option>
-        </select>';
+      ?>
 
-        // $_SESSION['car_number'] = "63조3333";
-
-        $car_number = $_SESSION['car_number'];
-        $sql = "SELECT driven_distance FROM user_car_data WHERE car_number = '$car_number'" ; 
+      <?php
+        if(isset($_GET['value'])){
+          $selectedCarNum = $_GET['value'];
+        }else {
+          $selectedCarNum = null; // default
+        }
+      ?>
+      <!-- 차량 선택 --> 
+      <select name="carNum" id="selectCarNum" onchange="getValue(this.value)">
+        <option value="">--선택하세요--</option>
+      <?php while ($array = getArray($result)){ ?>
+      <option value="<?php echo $array['car_number']?>">
+      <?php
+        echo $array['car_number'];
+      ?>
+      </option>
+      <?php } ?>
+      </select>
+      
+      <?php
+      if($selectedCarNum !== null){
+        $sql = "SELECT driven_distance FROM user_car_data WHERE car_number = '$selectedCarNum'"; 
         $result = mysqli_query($db,$sql);
         $array = mysqli_fetch_array($result);
 
         
         $db_distance = isset($array['driven_distance'])?$array['driven_distance']:0;
+      }
         mysqli_close($db);
       ?>
       <script>
