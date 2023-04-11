@@ -42,13 +42,25 @@
         session_start();
 
         //26조0666
-        $_SESSION['car_number'] = "63조3333";
+        // 현재 로그인 되어 있는 유저의 차 번호를 
+        // 배열로 받아서 선택 할 수 있게 한 후
+        // 밑에 메뉴들 다 접어두고
+        // 차 번호가 선택 되면 밑의 메뉴들이 펼쳐지게
+        
+        $result = makeQuery("SELECT * FROM user_car WHERE user_id = '$_SESSION[md_id]'");
+        $array = getArray($result);
+        echo '<select name="carNum" id="selectCarNum" onchange="changeViewCarData()">
+        <option value= "carNum"></option>
+        </select>';
+
+        // $_SESSION['car_number'] = "63조3333";
 
         $car_number = $_SESSION['car_number'];
         $sql = "SELECT driven_distance FROM user_car_data WHERE car_number = '$car_number'" ; 
         $result = mysqli_query($db,$sql);
-
         $array = mysqli_fetch_array($result);
+
+        
         $db_distance = isset($array['driven_distance'])?$array['driven_distance']:0;
         mysqli_close($db);
       ?>
@@ -242,8 +254,8 @@
 
     <!-- 로그인 메뉴 -->
     <div id="login">
-      <form action="login_server.php" method="POST">
-        <button type = "button" id="home_btn"><a href="index.php">Home</a></button>
+      <form action="../login/login_server.php" method="POST">
+        <button type = "button" id="home_btn"><a href="../index.php">Home</a></button>
         <?php if(isset($_GET['error'])) { ?>
         <p class="error"><?php echo $_GET['error']; ?></p>
         <?php } ?>
@@ -251,7 +263,7 @@
         <?php
         // $_SESSION['md_id'] ==> login_server.php 에서 세션에 저장 
           if(isset($_SESSION['md_id'])){ ?>   
-            <a class="text" href="./logout.php">logout</a>
+            <a class="text" href="../logout/logout.php">logout</a>
             <h1><?php echo $_SESSION['user_nickname']?>님 반갑습니다</h1>
             <!-- admin 일 시에 회원 정보 관리 버튼 활성화 -->
             <?php

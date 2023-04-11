@@ -70,7 +70,7 @@ session_start();
       <!-- 로그인 메뉴 -->
       <div id="login">
         <form action="../login/login_server.php" method="POST">
-        <button type = "button" id="home_btn"><a href="index.php">Home</a></button>
+        <button type = "button" id="home_btn"><a href="../index.php">Home</a></button>
         <?php if(isset($_GET['error'])) { ?>
         <p class="error"><?php echo $_GET['error']; ?></p>
         <?php } ?>
