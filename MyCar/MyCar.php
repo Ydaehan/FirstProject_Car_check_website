@@ -9,8 +9,8 @@ session_start();
     <title>CAR</title>
     <link rel="stylesheet" type="text/css" href="../CSS/text.css">
     <link rel="stylesheet" type="text/css" href="../CSS/grid.css">
-    <script src="./JS/sideBar.js"></script>
-    <script src="./JS/textHide.js"></script>
+    <script src="../JS/sideBar.js"></script>
+    <script src="../JS/textHide.js"></script>
   </head>
   <body>
     <div class="container">
@@ -49,7 +49,7 @@ session_start();
             if(!($id_Isset == $id)) {
                 echo '<h4><a href="InsertCar.php">차량 등록하러 가기</a></h4>';
             } else {
-                $search = "SELECT * FROM user_car_data WHERE user_id = '$id'";
+                $search = "SELECT * FROM user_car_data WHERE car_number = '$idRow[car_number]';";
                 $searchQuery = mysqli_query($db, $search);
                 while($row = mysqli_fetch_array($searchQuery)) {
                     $carNumber = $row['car_number'];
@@ -69,7 +69,7 @@ session_start();
       </div>
       <!-- 로그인 메뉴 -->
       <div id="login">
-        <form action="login_server.php" method="POST">
+        <form action="../login/login_server.php" method="POST">
         <button type = "button" id="home_btn"><a href="index.php">Home</a></button>
         <?php if(isset($_GET['error'])) { ?>
         <p class="error"><?php echo $_GET['error']; ?></p>
@@ -78,14 +78,14 @@ session_start();
         <?php
         // $_SESSION['md_id'] ==> login_server.php 에서 세션에 저장 
         if(isset($_SESSION['md_id'])){ ?>   
-          <a class="text" href="./logout.php">logout</a>
+          <a class="text" href="../logout/logout.php">logout</a>
           <h1><?php echo $_SESSION['user_nickname']?>님 반갑습니다</h1>
           <!-- admin 일 시에 회원 정보 관리 버튼 활성화 -->
           <?php
             $admin = $_SESSION['admin'];
           ?>
           <?php if($admin == "admin"){?>
-            <a href="manage_user.php">회원 정보 관리</a>
+            <a href="../manageUser/manage_user.php">회원 정보 관리</a>
           <?php } ?>
           <?php } else {?>
           <!-- 로그인 창 -->
@@ -96,7 +96,7 @@ session_start();
             <input type="password" placeholder="비밀번호..." name="user_pw">
 
             <button type="submit" name="login_btn">로그인</button>
-            <a href="join.php" class="save">아직 회원이 아니신가요? -> 회원가입 하러가기</a>
+            <a href="../join/join.php" class="save">아직 회원이 아니신가요? -> 회원가입 하러가기</a>
           <!-- 로그인 창 -->
         <?php } ?>
       </div>
