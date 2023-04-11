@@ -1,5 +1,5 @@
 <?php
-include ('db.php');
+include ('../db/db.php');
 session_start();
 ?>
 <!DOCTYPE html>
@@ -44,7 +44,9 @@ session_start();
             $idSearch = "SELECT * FROM user_car WHERE user_id = '$id'";
             $idSearchQuery = mysqli_query($db, $idSearch);
             $idRow = mysqli_fetch_array($idSearchQuery);
-            if(!($idRow['user_id'] == $id)) {
+            /* !($idRow['user_id'] == $id) */
+            $id_Isset = isset($idRow['user_id'])?$idRow['user_id']:'';
+            if(!($id_Isset == $id)) {
                 echo '<h4><a href="InsertCar.php">차량 등록하러 가기</a></h4>';
             } else {
                 $search = "SELECT * FROM user_car_data WHERE user_id = '$id'";

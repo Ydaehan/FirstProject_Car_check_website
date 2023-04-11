@@ -1,7 +1,8 @@
 <?php
 session_start();
 
-include('../index.php');
+/* 이거 왜 include 되어 있냐? */
+// include('../index.php');
 include('../db/db.php');
 $_POST;
 
@@ -54,9 +55,7 @@ if(isset($_POST['user_id']) && isset($_POST['user_pw']) )
       exit();
     }
   }
-}
-
-else{
+}else{
   header("location: ../index.php?error=알수없는 오류입니다");
   exit();
 }

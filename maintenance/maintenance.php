@@ -18,7 +18,7 @@
     <!-- 상단 메뉴 -->
     <div id="menu">
       <ul id="list">
-        <li><a href="./MyCar/MyCar.php">나의 차량</a></li>
+        <li><a href="../MyCar/MyCar.php">나의 차량</a></li>
         <li><a href="./maintenance.php">점검 목록</a></li>
         <li><a href="../freeBoard/freeBoardIndex.php">자유게시판</a></li>
         <li><a href="4.html">menu4</a></li>
@@ -38,7 +38,7 @@
     <!-- 중앙 페이지 본문 -->
     <div id="main">
       <?php
-        //include 'DB.php';
+        include '../db/db.php';
         session_start();
 
         //26조0666
@@ -46,11 +46,11 @@
 
         $car_number = $_SESSION['car_number'];
         $sql = "SELECT driven_distance FROM user_car_data WHERE car_number = '$car_number'" ; 
-        $result = mysqli_query($connect,$sql);
+        $result = mysqli_query($db,$sql);
 
         $array = mysqli_fetch_array($result);
-        $db_distance = $array['driven_distance'];
-        mysqli_close($connect);
+        $db_distance = isset($array['driven_distance'])?$array['driven_distance']:0;
+        mysqli_close($db);
       ?>
       <script>
         //다음 정비까지 남은 km를 구하는 함수

@@ -1,5 +1,5 @@
 <?php
-include ('./db/dn.php');
+include ('./db/db.php');
 session_start();
 ?>
 
@@ -94,7 +94,8 @@ session_start();
       <!-- 로그인 메뉴 -->
       <div id="login">
         <form action="./login/login_server.php" method="POST">
-        <button type = "button" id="home_btn"><a href="index.php">Home</a></button>
+          <!-- 이미 홈 화면 이므로 필요 없는 코드 -->
+        <!-- <button type = "button" id="home_btn"><a href="index.php">Home</a></button> -->
         <?php if(isset($_GET['error'])) { ?>
         <p class="error"><?php echo $_GET['error']; ?></p>
         <?php } ?>
