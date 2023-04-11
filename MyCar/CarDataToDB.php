@@ -46,8 +46,3 @@
         echo mysqli_error($db);
     }
 ?>
-<script>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-alert("차량 등록이 정상적으로 완료되었습니다.");
-location.href = "../index.php";
-</script>
