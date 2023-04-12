@@ -41,7 +41,14 @@ session_start();
   <h4><a href="InsertCar.php">차량 등록하러 가기</a></h4>
   <?php
     // 세션에 저장된 현재 아이디 값
-    $id = $_SESSION['md_id'];
+    $id = isset($_SESSION['md_id'])?$_SESSION['md_id']:" ";
+    if($id == " ") {
+      echo
+      '<script>
+        alert("로그인 후 이용 가능합니다.");
+        location.href = "../index.php";
+      </script>';
+    }
     // DB에 $id와 같은 아이디를 가진 데이터를 선택
     $idSearch = "SELECT * FROM user_car WHERE user_id = '$id';";
     $idSearchQuery = mysqli_query($db, $idSearch);
