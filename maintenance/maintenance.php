@@ -1,3 +1,14 @@
+<?php
+  include '../db/db.php';
+  session_start();
+  $id = isset($_SESSION['md_id'])?$_SESSION['md_id']:"";
+  if($id == ""){
+    echo '<script>
+    alert("로그인 후 이용 가능합니다.");
+    location.href = "../index.php";
+    </script>';
+  }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,16 +50,12 @@
     <!-- 중앙 페이지 본문 -->
     <div id="main">
       <?php
-        include '../db/db.php';
-        session_start();
-
         //26조0666
         // 현재 로그인 되어 있는 유저의 차 번호를 
         // 배열로 받아서 선택 할 수 있게 한 후
         // 밑에 메뉴들 다 접어두고
         // 차 번호가 선택 되면 밑의 메뉴들이 펼쳐지게
-        
-        $result = makeQuery("SELECT * FROM user_car WHERE user_id = '$_SESSION[md_id]'");
+        $result = makeQuery("SELECT * FROM user_car WHERE user_id = '$id'");
       ?>
 
       <?php
