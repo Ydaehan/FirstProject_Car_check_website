@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+
+  
+  <h1>Get Location Example</h1>
+    <div id="map" style="width:500px;height:400px;"></div>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a33348b62ebc480dcb95eacb2dcfe458"></script>
+    <script>
+      var latitude;  //위도
+      var longitude; //경도
+
+      var container = document.getElementById('map');
+
+      //현재 본인 ip의 위치를 받는 함수
+      navigator.geolocation.getCurrentPosition((position)=>{
+        latitude = position.coords.latitude;
+        longitude = position.coords.longitude;
+      console.log('latitude',latitude);
+      console.log('longitude',longitude);
+
+      //카카오 지도에 위치를 띄움
+      var options = {
+        center: new kakao.maps.LatLng(latitude, longitude),
+        level: 3
+      };
+  
+      var map = new kakao.maps.Map(container, options);
+    });
+    </script>
+<!-- test2 aaaaaa asfdasdfasdf-->
+</body>
+</html>
