@@ -41,8 +41,8 @@ session_start();
   <h4><a href="InsertCar.php">차량 등록하러 가기</a></h4>
   <?php
     // 세션에 저장된 현재 아이디 값
-    $id = isset($_SESSION['md_id'])?$_SESSION['md_id']:" ";
-    if($id == " ") {
+    $id = isset($_SESSION['md_id'])?$_SESSION['md_id']:"";
+    if($id == "") {
       echo
       '<script>
         alert("로그인 후 이용 가능합니다.");
