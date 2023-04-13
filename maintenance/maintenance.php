@@ -62,7 +62,7 @@
         if(isset($_GET['value'])){
           $selectedCarNum = $_GET['value'];
         }else {
-          $selectedCarNum = null; // default
+          $selectedCarNum = ""; // default
         }
       ?>
       <!-- 차량 선택 --> 
@@ -79,12 +79,11 @@
       
       <?php
       if($selectedCarNum !== null){
-        $sql = "SELECT driven_distance FROM user_car_data WHERE car_number = '$selectedCarNum'"; 
+        $sql = "SELECT driven_distance, last_kilometer FROM user_car_data WHERE car_number='$selectedCarNum'"; 
         $result = mysqli_query($db,$sql);
         $array = mysqli_fetch_array($result);
-
-        
         $db_distance = isset($array['driven_distance'])?$array['driven_distance']:0;
+        $db_last_kilometer = isset($array['last_kilometer'])?$array['last_kilometer']:0;
       }
         mysqli_close($db);
       ?>
@@ -96,8 +95,10 @@
         } 
         <?php
           echo "var db_distance = '$db_distance';";
+          echo "var db_last_kilometer = '$db_last_kilometer';";
         ?>
         var driving_distance1     = db_distance; //현재까지 주행 거리 @@주의@@(db로 받아야함)
+        var result                = db_distance - db_last_kilometer; // 최근 정비 부터의 주행 거리
         var cycleAirConFilter     = 5000;        //에어컨 필터
         var cycleEnginOil         = 15000;       //엔진오일 및 오일필터
         var cycleWiperBlade       = 8000;        //와이퍼 블레이드
@@ -133,7 +134,7 @@
 
       <div class="menuBorder">
         <script>
-          checkMaintenanceCycle(cycleAirConFilter,driving_distance1);
+          checkMaintenanceCycle(cycleAirConFilter,result);
         </script>
         <a href="Detail/aircon.php">
         <img class = "imgIcon" src = "https://cdn-icons-png.flaticon.com/512/900/900094.png"/></a>
@@ -142,7 +143,7 @@
     
       <div class="menuBorder">
         <script>
-          checkMaintenanceCycle(cycleEnginOil,driving_distance1);
+          checkMaintenanceCycle(cycleEnginOil,result);
         </script>
         <a href="Detail/enginOil.php">
         <img class = "imgIcon" src = "https://cdn-icons-png.flaticon.com/512/4633/4633013.png"/></a>
@@ -151,7 +152,7 @@
 
       <div class="menuBorder">
         <script>
-          checkMaintenanceCycle(cycleWiperBlade,driving_distance1);
+          checkMaintenanceCycle(cycleWiperBlade,result);
         </script>
         <a href="Detail/wiper.php">
         <img class = "imgIcon" src = "https://cdn-icons-png.flaticon.com/512/5999/5999420.png"/></a>
@@ -160,7 +161,7 @@
 
       <div class="menuBorder">
         <script>
-          checkMaintenanceCycle(cycleBlakeOil,driving_distance1);
+          checkMaintenanceCycle(cycleBlakeOil,result);
         </script>
         <a href="Detail/blakeOil.php">
         <img class = "imgIcon" src = "https://us.123rf.com/450wm/leshkasmok/leshkasmok1503/leshkasmok150300126/37976958-%EB%B8%8C%EB%A0%88%EC%9D%B4%ED%81%AC-%EC%95%A1%EC%97%90-%EB%AC%B8%EC%A0%9C%EA%B0%80-%EC%9E%88%EC%8A%B5%EB%8B%88%EB%8B%A4-%ED%9D%B0%EC%83%89-%EB%B0%B0%EA%B2%BD%EC%97%90-%EB%8B%A8%EC%9D%BC-%ED%8F%89%EB%A9%B4-%EC%95%84%EC%9D%B4%EC%BD%98.jpg?ver=6"/></a>
@@ -169,7 +170,7 @@
 
       <div class="menuBorder">
         <script>
-          checkMaintenanceCycle(cycleAirCleanerFilter,driving_distance1);
+          checkMaintenanceCycle(cycleAirCleanerFilter,result);
         </script>
         <a href="Detail/airCleaner.php">
         <img class = "imgIcon" src = "https://w7.pngwing.com/pngs/105/725/png-transparent-filter-heroicons-ui-icon.png"/></a>
@@ -178,7 +179,7 @@
 
       <div class="menuBorder">
         <script>
-          checkMaintenanceCycle(cycleEngineAntifreeze,driving_distance1);
+          checkMaintenanceCycle(cycleEngineAntifreeze,result);
         </script>
         <a href="Detail/enginAntifreeze.php">
         <img class = "imgIcon" src = "https://cdn-icons-png.flaticon.com/512/95/95134.png?w=360"/></a>
@@ -187,7 +188,7 @@
 
       <div class="menuBorder">
         <script>
-          checkMaintenanceCycle(cycleDriveBelt,driving_distance1);
+          checkMaintenanceCycle(cycleDriveBelt,result);
         </script>
         <a href="Detail/DriveBelt.php">
         <img class = "imgIcon" src = "https://cdn-icons-png.flaticon.com/512/1894/1894556.png"/></a>
@@ -196,7 +197,7 @@
 
       <div class="menuBorder">
         <script>
-          checkMaintenanceCycle(cycleBattery,driving_distance1);
+          checkMaintenanceCycle(cycleBattery,result);
         </script>
         <a href="Detail/Battery.php">
         <img class = "imgIcon" src = "https://png.pngtree.com/png-vector/20190307/ourmid/pngtree-vector-full-battery-icon-png-image_762950.jpg"/></a>
@@ -205,7 +206,7 @@
 
       <div class="menuBorder">
         <script>
-          checkMaintenanceCycle(cycleTire,driving_distance1);
+          checkMaintenanceCycle(cycleTire,result);
         </script>
         <a href="Detail/Tire.php">
         <img class = "imgIcon" src = "https://cdn-icons-png.flaticon.com/512/1078/1078598.png"/></a>
@@ -214,7 +215,7 @@
 
       <div class="menuBorder">
         <script>
-          checkMaintenanceCycle(cyclePowerSteeringOil,driving_distance1);
+          checkMaintenanceCycle(cyclePowerSteeringOil,result);
         </script>
         <a href="Detail/PowerSteeringOil.php">
         <img class = "imgIcon" src = "https://w7.pngwing.com/pngs/131/318/png-transparent-car-steering-wheel-computer-icons-steering-wheel-driving-logo-car.png"/></a>
@@ -223,7 +224,7 @@
 
       <div class="menuBorder">
         <script>
-          checkMaintenanceCycle(cycleMissionOil,driving_distance1);
+          checkMaintenanceCycle(cycleMissionOil,result);
         </script>
         <a href="Detail/MissionOil.php">
         <img class = "imgIcon" src = "https://mblogthumb-phinf.pstatic.net/MjAxOTA4MDdfMjQ5/MDAxNTY1MTU4OTY0MTU2.zdewr99-eiUh6n2oRrb0RNhEJEM1dop3Cgiaz2eRL70g.I4spz9knj5lAVVV4nKPaE6aYNfazqf6LJcIdVWlcQdUg.PNG.sungbin126/rftertgrfgtrfh.png?type=w800"/></a>
@@ -232,7 +233,7 @@
 
       <div class="menuBorder">
         <script>
-          checkMaintenanceCycle(cycleBrakePadsDiscs,driving_distance1);
+          checkMaintenanceCycle(cycleBrakePadsDiscs,result);
         </script>
         <a href="Detail/BrakePadsDiscs.php">
         <img class = "imgIcon" src = "https://cdn-icons-png.flaticon.com/512/938/938708.png"/></a>
@@ -241,7 +242,7 @@
 
       <div class="menuBorder">
         <script>
-          checkMaintenanceCycle(cycleFuelFilter,driving_distance1);
+          checkMaintenanceCycle(cycleFuelFilter,result);
         </script>
         <a href="Detail/FuelFilter.php">
         <img class = "imgIcon" src = "https://media.istockphoto.com/id/1271577057/ko/%EB%B2%A1%ED%84%B0/%EC%97%B0%EB%A3%8C-%ED%95%84%ED%84%B0-%EA%B5%90%EC%B2%B4-%EA%B8%80%EB%A6%AC%ED%94%84-%EC%95%84%EC%9D%B4%EC%BD%98-%EB%B2%A1%ED%84%B0-%EA%B2%A9%EB%A6%AC-%EC%9D%BC%EB%9F%AC%EC%8A%A4%ED%8A%B8%EB%A0%88%EC%9D%B4%EC%85%98.jpg?s=612x612&w=0&k=20&c=OMfgF5IoOZRUcJEZ-_vQlxATFfX_f1Ui6pQeMyu3Spo="/></a>
@@ -250,7 +251,7 @@
 
       <div class="menuBorder">
         <script>
-          checkMaintenanceCycle(cycleSparkPlug,driving_distance1);
+          checkMaintenanceCycle(cycleSparkPlug,result);
         </script>
         <a href="Detail/SparkPlug.php">
         <img class = "imgIcon" src = "https://cdn-icons-png.flaticon.com/512/3593/3593524.png"/></a>
@@ -259,7 +260,7 @@
 
       <div class="menuBorder">
         <script>
-          checkMaintenanceCycle(cycleTimingBelt,driving_distance1);
+          checkMaintenanceCycle(cycleTimingBelt,result);
         </script>
         <a href="Detail/TimingBelt.php">
         <img class = "imgIcon" src = "https://cdn-icons-png.flaticon.com/512/3903/3903012.png"/></a>
@@ -268,7 +269,7 @@
 
       <div class="menuBorder">
         <script>
-          checkMaintenanceCycle(cycleTireLocation,driving_distance1);
+          checkMaintenanceCycle(cycleTireLocation,result);
         </script>
         <a href="Detail/TireLocation.php">
         <img class = "imgIcon" src = "https://d3jn14jkdoqvmm.cloudfront.net/wp/wp-content/uploads/2022/11/14161013/icon-tire-%E1%84%90%E1%85%A1%E1%84%8B%E1%85%B5%E1%84%8B%E1%85%A5.png"/></a>

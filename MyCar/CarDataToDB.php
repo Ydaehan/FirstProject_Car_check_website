@@ -1,4 +1,5 @@
 <?php
+    include ('../db/db.php');
     session_start();
     // FORM으로 받은 값 변수
     $userID = $_SESSION['md_id']; // 세션에서 현재 사용자 아이디를 받아 옴
@@ -19,11 +20,6 @@
     }
 
     // db 접속 관련 변수
-    $dbAddress = "172.21.2.130";
-    $dbUserID = "hyun";
-    $dbUserPW = "123";
-    $dbName = "caruser_info";
-    $db = mysqli_connect($dbAddress, $dbUserID, $dbUserPW, $dbName);
 
     // user_car에 입력
     $db_inputUserCar = "INSERT INTO user_car(user_id, car_number)
