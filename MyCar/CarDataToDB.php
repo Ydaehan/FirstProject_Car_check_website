@@ -37,6 +37,7 @@
     VALUE ('$car_number', '$driven_distance', NOW(), '$car_type', '$date_of_last_service', '$last_kilometer', '$maintenance_date')";
     $db_UserCarDataQuery = mysqli_query($db, $db_inputUserCarData);
 
+    
     // 상기한 에러 처리 if문과 동일
     if($db_UserCarDataQuery === false) {
         echo mysqli_error($db);
