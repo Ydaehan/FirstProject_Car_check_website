@@ -70,7 +70,7 @@ if ($e_pageNum > $total_page) {
         var check = confirm("정말 탈퇴하시겠습니까?\n탈퇴한 아이디는 사용하실 수 없습니다.");
 
         if(check == true){
-            location.href = "./delete.php?user_id="<?php echo $user_id;?>;
+            location.href = "./delete.php?user_id="+userId;
         }
     };
   </script>
