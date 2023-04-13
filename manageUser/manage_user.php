@@ -60,7 +60,6 @@ if ($e_pageNum > $total_page) {
 <html lang="en">
 
 <head>
-\
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -77,12 +76,10 @@ if ($e_pageNum > $total_page) {
 </head>
 
 <body>
-
-  회원 정보 관리<br>
   <h2>* 관리자 페이지 *</h2>
   <p>"<?php echo $user_nickname ?>"님,안녕하세요.</p>
   <p>
-    <button type="button" id="home_btn"><a href="index.php">Home</a></button>
+    <button type="button" id="home_btn"><a href="../index.php">Home</a></button>
     <a href="../logout/logout.php">Logout</a>
   </p>
   <hr>
