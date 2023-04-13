@@ -1,5 +1,5 @@
 <?php
-$dbAddress = "172.21.4.183";
+$dbAddress = "172.21.2.13";
 $dbUserID = "test";
 $dbUserPW = "123";
 $dbName = "caruser_info";
